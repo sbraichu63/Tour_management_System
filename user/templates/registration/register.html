@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Tour Management</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'login.css' %}">
+</head>
+
+<body>
+    <div class="bg-wrapper"></div>
+
+    <div class="login-box">
+        <h2>Create Account</h2>
+        <form method="POST" id="registerForm">
+            {% csrf_token %}
+            
+            <div id="validation-error" style="display: none;"></div>
+
+            <div class="form-group">
+                {{ form.as_p }}
+            </div>
+
+            <button type="submit" class="auth-btn">Register</button>
+        </form>
+        
+        <div class="auth-footer">
+            <p>Already have an account? <a href="{% url 'login' %}">Sign In</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Placeholder injections to keep floating label styles clean
+        document.querySelectorAll('.form-group input').forEach(input => {
+            if (input.name) {
+                let labelText = input.name.replace(/[0-9]/g, ''); // e.g. password1 -> password
+                labelText = labelText.charAt(0).toUpperCase() + labelText.slice(1);
+                input.setAttribute('placeholder', labelText);
+            }
+        });
+
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            var errorDiv = document.getElementById('validation-error');
+            errorDiv.style.display = "none";
+            errorDiv.innerHTML = ""; // Clear previous errors
+
+            // Find fields
+            var usernameField = document.querySelector('input[name="username"]');
+            var emailField = document.querySelector('input[name="email"]') || document.querySelector('input[type="email"]');
+            var passwordField = document.querySelector('input[type="password"]');
+
+            // Regex patterns
+            var alphabetsOnlyRegex = /^[a-zA-Z]+$/;
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            var passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+
+            // Validate Username
+            if (usernameField && !alphabetsOnlyRegex.test(usernameField.value)) {
+                e.preventDefault();
+                errorDiv.style.display = "block";
+                errorDiv.innerHTML = "Username must contain only alphabets (no numbers/spaces).";
+                usernameField.focus();
+                return;
+            }
+
+            // Validate Email
+            if (emailField && !emailRegex.test(emailField.value)) {
+                e.preventDefault();
+                errorDiv.style.display = "block";
+                errorDiv.innerHTML = "Please enter an authentic email address.";
+                emailField.focus();
+                return;
+            }
+
+            // Validate Password
+            if (passwordField && !passwordRegex.test(passwordField.value)) {
+                e.preventDefault();
+                errorDiv.style.display = "block";
+                errorDiv.innerHTML = "Password must be at least 8 chars long with 1 letter, 1 number, and 1 special character.";
+                passwordField.focus();
+                return;
+            }
+        });
+    </script>
+</body>
+
+</html>

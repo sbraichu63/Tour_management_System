@@ -1,0 +1,147 @@
+{%extends 'base.html'%} {%block title%}Home{%endblock%} {%block content%} {% load static%}
+<section class="home">
+
+	<div class="swiper home-slider">
+
+		<div class="swiper-wrapper">
+
+			<div class="swiper-slide slide" style="background:url(' /static/images/rishikesh_1.webp ') no-repeat">
+				<div class="content">
+					<span>explore, discover, travel</span>
+					<h3>travel around the India</h3>
+					<a href="{% url 'homeView'%} " class=" btn ">discover more</a>
+				</div>
+			</div>
+
+			<div class="swiper-slide slide " style="background:url( ' /static/images/jaipur_1.webp ') no-repeat ">
+				<div class="content ">
+					<span>explore, discover, travel</span>
+					<h3>discover the new places</h3>
+					<a href="{% url 'homeView'%} " class=" btn ">discover more</a>
+				</div>
+			</div>
+
+			<div class="swiper-slide slide " style="background:url( ' /static/images/kochi_1.webp ') no-repeat ">
+				<div class="content ">
+					<span>explore, discover, travel</span>
+					<h3>make your tour worthwhile</h3>
+					<a href="{% url 'homeView'%} " class="btn ">discover more</a>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="swiper-button-next "></div>
+		<div class="swiper-button-prev "></div>
+
+	</div>
+
+</section>
+
+<!-- home section ends -->
+
+<!-- services section starts  -->
+
+<section class="services ">
+
+	<h1 class="heading-title "> our services </h1>
+
+	<div class="box-container ">
+
+		<div class="box ">
+			<img src="{% static 'images/icon-1.png' %} " alt=" ">
+			<h3>adventure</h3>
+		</div>
+
+		<div class="box ">
+			<img src="{% static 'images/icon-2.png' %} " alt=" ">
+			<h3>tour guide</h3>
+		</div>
+
+		<div class="box ">
+			<img src="{% static 'images/icon-3.png' %} " alt=" ">
+			<h3>trekking</h3>
+		</div>
+
+		<div class="box ">
+			<img src="{% static 'images/icon-4.png' %} " alt=" ">
+			<h3>camp fire</h3>
+		</div>
+
+		<div class="box ">
+			<img src="{% static 'images/icon-5.png' %} " alt=" ">
+			<h3>off road</h3>
+		</div>
+
+		<div class="box ">
+			<img src="{% static 'images/icon-6.png' %} " alt=" ">
+			<h3>camping</h3>
+		</div>
+
+	</div>
+
+</section>
+
+<!-- services section ends -->
+
+<!-- home about section starts  -->
+
+<section class="home-about ">
+
+	<div class="image ">
+		<img src="{% static 'images/about_1.png' %} " alt=" ">
+	</div>
+
+	<div class="content ">
+		<h3>about us</h3>
+		<p>At GhumGham, we believe that travel is more than just reaching a destination—it's about discovering the soul of Incredible India. From the majestic heights of the Himalayas in Ladakh and the spiritual energy of Rishikesh, to the vibrant coastal breezes of Goa and the sacred riverbanks of Varanasi, our platform is deeply committed to taking the stress out of your journey. As a dedicated team of passionate explorers, we curate seamless, personalized travel packages equipped with local expertise, secure bookings, and authentic regional experiences. Whether you are seeking a rugged off-road trek in the north, a peaceful campfire retreat, or deep cultural immersion across the subcontinent, we handle all the logistics so you can focus entirely on creating unforgettable Indian stories.</p>
+	</div>
+
+</section>
+
+
+<Section id="slides_parent ">
+	<h4 class="heading-title "> Gallery </h4>
+	<div class="container ">
+		<div class="slides ">
+			<div class="slide_1 		" style=" background-image: url('/static/images/rishikesh_1.webp');">
+				<div class="slide_info ">
+					<p>Rishikesh</p>
+				</div>
+			</div>
+			<div class="slide_1 slide_2 " style=" background-image: url('/static/images/kochi_1.webp');">
+				<div class="slide_info ">
+					<p>Kochi</p>
+				</div>
+			</div>
+			<div class="slide_1 slide_3 " style=" background-image: url('/static/images/varanasi_1.png');">
+				<div class="slide_info ">
+					<p>Varanasi</p>
+				</div>
+			</div>
+			<div class="slide_1  " style=" background-image: url('/static/images/jaipur_1.webp');">
+				<div class="slide_info ">
+					<p>Jaipur</p>
+				</div>
+			</div>
+			<div class="slide_1  " style=" background-image: url('/static/images/winter_ladakh.jpg');">
+				<div class="slide_info ">
+					<p>Ladakh</p>
+				</div>
+			</div>
+			<div class="slide_1 slide_6 " style=" background-image: url('/static/images/summer_sikkim.jpg');">
+				<div class="slide_info ">
+					<p>Sikkim</p>
+				</div>
+			</div>
+			<div class="slide_1 slide_7 " style=" background-image: url('/static/images/goa_1.png');">
+				<div class="slide_info ">
+					<p>Goa</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</Section>
+
+
+{%endblock%}

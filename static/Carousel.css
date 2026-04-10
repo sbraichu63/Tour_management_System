@@ -1,0 +1,103 @@
+/* Basic Reset for Carousel */
+.carousel-wrapper {
+    position: relative;
+    max-width: 800px;
+    margin: auto;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.carousel {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background: #f4f4f4;
+}
+
+/* Images */
+.carousel-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    z-index: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.carousel-img.carousel-img-displayed {
+    opacity: 1;
+    z-index: 2;
+}
+
+/* Arrows */
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 24px;
+    z-index: 10;
+    transition: background-color 0.3s ease;
+    padding: 0;
+    background-image: none;
+    /* Removes the overlapping background arrow */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-arrow:hover {
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.carousel-arrow-prev {
+    left: 15px;
+}
+
+.carousel-arrow-next {
+    right: 15px;
+}
+
+/* Package details styling */
+.package-details h3 {
+    margin-bottom: 15px;
+}
+
+.package-details ul li {
+    margin-bottom: 8px;
+}
+
+/* Comments styling */
+.comments .comment {
+    background: #f7f7f7;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border-left: 4px solid #5cb85c;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .carousel {
+        height: 250px;
+    }
+
+    .carousel-arrow {
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+        font-size: 18px;
+    }
+}

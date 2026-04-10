@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background-color: #f4f6f9; /* Soft background */
+}
+
+.navbar {
+    width: 280px;
+    height: 100vh;
+    position: fixed;
+    margin-left: -300px;
+    background-color: #1e293b; /* Premium slate dark */
+    transition: margin-left 0.4s ease;
+    box-shadow: 4px 0 15px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+/* Sidebar Branding */
+.navbar-brand .display-5 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #38bdf8;
+    text-align: center;
+    width: 100%;
+}
+
+.nav-link {
+    font-size: 1.1em;
+    padding: 15px 20px !important;
+    transition: 0.3s ease;
+    border-left: 4px solid transparent;
+    color: #cbd5e1 !important;
+    display: flex;
+    align-items: center;
+    gap: 15px; /* space between icon and text */
+}
+
+.nav-link:active,
+.nav-link:focus,
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-left-color: #38bdf8;
+    color: #ffffff !important;
+}
+
+/* Sub-menus */
+.dropdown-menu {
+    background-color: #0f172a; /* Deeper slate for sub-menu */
+    border: none;
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.dropdown-item {
+    font-size: 1rem;
+    padding: 12px 20px 12px 55px !important;
+    color: #94a3b8 !important;
+    transition: 0.3s ease;
+}
+
+.dropdown-item:active,
+.dropdown-item:focus,
+.dropdown-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff !important;
+}
+
+/* Profile Tag */
+.profile-tag {
+    background: rgba(255,255,255,0.05);
+    margin: 0 15px 20px;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #e2e8f0;
+    font-weight: 500;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+.profile-tag i {
+    color: #38bdf8;
+    font-size: 1.4rem;
+}
+
+/* Container Logic */
+.my-container {
+    transition: margin-left 0.4s ease;
+    padding: 30px !important;
+}
+
+.active-nav {
+    margin-left: 0;
+}
+
+.active-cont {
+    margin-left: 280px;
+}
+
+/* Menu Button */
+#menu-btn {
+    background-color: #fff;
+    color: #1e293b;
+    border: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s ease;
+}
+#menu-btn:hover {
+    background-color: #f8fafc;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+}

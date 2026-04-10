@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+{% load static %}
+
+<section class="container packages-section">
+
+    <h2 class="section-title">— Packages —</h2>
+
+    <div class="packages-grid">
+        {% for post in object_list %}
+        <div class="package-card">
+
+            <div class="image">
+                {% if post.pack_img %}
+                <img src="{{ post.pack_img.url }}" alt="{{ post.title }}">
+                {% else %}
+                <img src="{% static 'images/noimage.jpg' %}" alt="no image">
+                {% endif %}
+            </div>
+
+            <div class="content">
+                <h3>
+                    <a href="{% url 'pack_detailView' post.pk %}">
+                        {{ post.title }}
+                    </a>
+                </h3>
+
+                <p class="desc">
+                    A Trip to {{ post.title }} for {{ post.days }} days.
+                </p>
+
+                <ul class="info">
+                    <li><strong>Days:</strong> {{ post.days }}</li>
+                    <li><strong>Price:</strong> Rs. {{ post.price }}</li>
+                    <li><strong>Province:</strong> {{ post.Provinces }}</li>
+                    <li><strong>Hoster:</strong> {{ post.Hoster }}</li>
+                </ul>
+
+                <a href="{% url 'pack_detailView' post.pk %}" class="btn-view">
+                    View Details
+                </a>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+
+</section>
+
+{% endblock %}

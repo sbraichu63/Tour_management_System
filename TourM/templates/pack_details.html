@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Package Details{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="{% static 'carousel.css' %}">
+
+<section class="container package-section mt-5">
+
+    <h2 class="text-center mb-4">{{ post.title }}</h2>
+
+    <div class="carousel-wrapper text-center">
+        <div class="carousel">
+
+            <button type="button" id="carousel-prev" class="carousel-arrow carousel-arrow-prev"
+                aria-label="Previous Image">&lt;</button>
+            <button type="button" id="carousel-next" class="carousel-arrow carousel-arrow-next"
+                aria-label="Next Image">&gt;</button>
+
+            {% comment %} Carousel images {% endcomment %}
+            {% if post.pack_img %}
+            <img id="carousel-0" class="carousel-img carousel-img-displayed" src="{{ post.pack_img.url }}" alt="image1">
+            {% else %}
+            <img id="carousel-0" class="carousel-img carousel-img-displayed" src="{% static 'images/noimage.jpg' %}"
+                alt="image1">
+            {% endif %}
+
+            {% if post.pack_img1 %}
+            <img id="carousel-1" class="carousel-img carousel-img-hidden" src="{{ post.pack_img1.url }}" alt="image2">
+            {% else %}
+            <img id="carousel-1" class="carousel-img carousel-img-hidden" src="{% static 'images/noimage.jpg' %}"
+                alt="image2">
+            {% endif %}
+
+            {% if post.pack_img2 %}
+            <img id="carousel-2" class="carousel-img carousel-img-hidden" src="{{ post.pack_img2.url }}" alt="image3">
+            {% else %}
+            <img id="carousel-2" class="carousel-img carousel-img-hidden" src="{% static 'images/noimage.jpg' %}"
+                alt="image3">
+            {% endif %}
+
+            {% if post.pack_img3 %}
+            <img id="carousel-3" class="carousel-img carousel-img-hidden" src="{{ post.pack_img3.url }}" alt="image4">
+            {% else %}
+            <img id="carousel-3" class="carousel-img carousel-img-hidden" src="{% static 'images/noimage.jpg' %}"
+                alt="image4">
+            {% endif %}
+
+            {% if post.pack_img4 %}
+            <img id="carousel-4" class="carousel-img carousel-img-hidden" src="{{ post.pack_img4.url }}" alt="image5">
+            {% else %}
+            <img id="carousel-4" class="carousel-img carousel-img-hidden" src="{% static 'images/noimage.jpg' %}"
+                alt="image5">
+            {% endif %}
+
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="package-details mt-4">
+        <h3>{{ post.title }}</h3>
+        <p>{{ post.body|safe }}</p>
+        <ul class="list-unstyled">
+            <li><b>Province:</b> {{ post.Provinces }}</li>
+            <li><b>Days:</b> {{ post.days }}</li>
+            <li><b>Price:</b> Rs. {{ post.price }}</li>
+            <li><b>Hoster:</b> {{ post.Hoster }}</li>
+            <li><b>Max Size:</b> {{ post.Size }}</li>
+            <li><b>Where you'll stay:</b> {{ post.Accomodation }}</li>
+            <li><b>Transportation:</b> {{ post.Transportation }}</li>
+        </ul>
+
+        <a href="{% url 'checkout' post.pk %}" class="btn btn-success btn-lg mt-3">Enroll</a>
+    </div>
+
+    <hr>
+
+    <div class="comments mt-4">
+        <h2>Comments</h2>
+        {% if post.comments.all %}
+        {% for comment in post.comments.all %}
+        <div class="comment mb-3">
+            <small>{{ comment.name }} - {{ comment.date_added }}</small>
+            <p>{{ comment.body }}</p>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>Be the first to comment! <a href="#">Comment</a></p>
+        {% endif %}
+    </div>
+
+</section>
+
+<script src="{% static 'carousel.js' %}"></script>
+{% endblock %}
