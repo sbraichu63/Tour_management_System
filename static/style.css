@@ -1925,7 +1925,7 @@ section#welcome_Sec p {
     color: #e74c3c;
 }
 
-/* Large hero image */
+
 .modal-hero {
     width: 100%;
     height: 260px;
@@ -1954,7 +1954,7 @@ section#welcome_Sec p {
 }
 
 .modal-content p {
-    font-size: 1.25rem;           /* Bigger & more readable */
+    font-size: 1.25rem;           
     line-height: 1.85;
     color: #444;
     padding: 0 35px 35px;
@@ -1989,4 +1989,60 @@ section#welcome_Sec p {
         font-size: 1.15rem;
         padding: 0 25px 30px;
     }
+}
+.seasons {
+    padding: 80px 0;
+    background: #f9f9f9;
+}
+
+.season-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.season-box {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: all 0.4s ease;
+    cursor: pointer;
+}
+
+.season-box:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.season-box img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.season-box h3 {
+    padding: 15px 20px 5px;
+    font-size: 1.6rem;
+    color: #222;
+}
+
+.season-box p {
+    padding: 0 20px 20px;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Reuse the same modern modal style you already have for services */
+.modal-content h2 { font-size: 2.4rem; margin: 15px 30px 10px; }
+.modal-content p { font-size: 1.25rem; line-height: 1.85; padding: 0 35px 40px; }
+
+.heading {
+    background-image: url("/static/images/season.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
 }

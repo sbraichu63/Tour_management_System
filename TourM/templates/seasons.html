@@ -3,71 +3,108 @@
 
 <!-- CODE HERE -->
 
-<!-- header section ends -->
 
 
-<div class="heading" style="background:url(' /static/images/season.jpg ') no-repeat">
+<!-- Seasons in India Section -->
+<<div class="heading" style="background-image: url({% static 'images/season.jpg' %});">
     <h1>Seasons in India</h1>
 </div>
 
-<section class="about">
+<section class="seasons" id="seasons">
+    <div class="container">
+        <div class="season-container">
 
-    <div class="image">
+            <!-- Summer -->
+            <div class="season-box" onclick="showSeasonModal(1)">
+                <img src="{% static 'images/summer_sikkim.jpg' %}" alt="Summer in Sikkim">
+                <h3>Summer Season</h3>
+                <p>Cool Himalayan escape • Rhododendron blooms • Perfect trekking weather</p>
+            </div>
 
-        <img src="{% static 'images/summer_sikkim.jpg' %} " alt="">
-    </div>
+            <!-- Autumn -->
+            <div class="season-box" onclick="showSeasonModal(2)">
+                <img src="{% static 'images/autum_rishikesh.jpg' %}" alt="Autumn in Rishikesh">
+                <h3>Autumn Season</h3>
+                <p>Clear skies • Festivals • Best time for Ganga Aarti & rafting</p>
+            </div>
 
-    <div class="content">
-        <h3>1. Summer Season</h3>
-        <p> Summer in most of India is hot, with plains often exceeding 40°C. Thats why the Himalayas become the perfect escape. Sikkim shines in summer with cool breezes, snow-fed rivers, and lush valleys. The Yumthang Valley bursts into color with rhododendrons, while Tsomgo Lake and Nathula Pass remain accessible and breathtaking. Trekking and mountain exploration are at their best, offering relief from the scorching heat elsewhere.</p>
-    </div>
-</section>
+            <!-- Winter -->
+            <div class="season-box" onclick="showSeasonModal(3)">
+                <img src="{% static 'images/winter_ladakh.jpg' %}" alt="Winter in Ladakh">
+                <h3>Winter Season</h3>
+                <p>Snow-covered wonderland • Chadar Trek • Magical frozen landscapes</p>
+            </div>
 
-<section class="about">
+            <!-- Spring -->
+            <div class="season-box" onclick="showSeasonModal(4)">
+                <img src="{% static 'images/spring_kochi.jpg' %}" alt="Spring in Kochi">
+                <h3>Spring Season</h3>
+                <p>Blooming flowers • Pleasant weather • Ideal for backwaters & heritage</p>
+            </div>
 
-    <div class="image">
-        <img src="{% static 'images/autum_rishikesh.jpg' %}" alt="">
-    </div>
-
-    <div class="content">
-        <h3>2. Autumn Season</h3>
-        <p> Autumn brings crisp air, golden light, and a festive spirit. Temperatures drop to comfortable levels, and skies are clear after the monsoon. This is the best time for spiritual and cultural destinations like Varanasi and Rishikesh. The Ganga Aarti feels magical under the autumn sky, and festivals like Diwali and Dev Deepawali illuminate the ghats with thousands of lamps. Adventure sports in Rishikesh, like rafting, are also at their peak as the river flows strongly after the rains</p>
-    </div>
-</section>
-
-<section class="about">
-
-    <div class="image">
-        <img src="{% static 'images/winter_ladakh.jpg' %}" alt="">
-    </div>
-
-    <div class="content">
-        <h3>3. Winter Season</h3>
-        <p> Winter transforms northern India into a wonderland. In Ladakh, temperatures plunge below freezing, but the landscapes are surreal—frozen lakes, snow-covered passes, and the famous Chadar Trek across the frozen Zanskar River. Its a season for adventurers who want to experience raw Himalayan beauty. Meanwhile, desert cities like Jaipur are pleasantly cool, making it the best time to explore forts, palaces, and bazaars without the summer heat.</p>
-    </div>
-</section>
-
-<section class="about">
-
-    <div class="image">
-        <img src="{% static 'images/spring_kochi.jpg' %}" alt="">
-    </div>
-
-    <div class="content">
-        <h3>4. Spring Season</h3>
-        <p>Spring is mild and refreshing, with blooming flowers and pleasant temperatures. Its neither too hot nor too cold, making coastal and cultural destinations like Kochi perfect. You can enjoy backwaters, spice markets, and heritage walks without the heavy humidity of summer.
-.</p>
+        </div>
     </div>
 </section>
 
+<!-- Seasons Modal -->
+<div id="seasonModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeSeasonModal()">&times;</span>
+        <img id="seasonHero" src="" alt="" class="modal-hero">
+        <h2 id="seasonTitle"></h2>
+        <p id="seasonDesc"></p>
+    </div>
+</div>
 
+<script>
+const seasonData = {
+    1: {
+        title: "Summer Season",
+        image: "{% static 'images/summer_sikkim.jpg' %}",
+        desc: "Experience the cool Himalayan escape during summer. Witness the beautiful rhododendron blooms and enjoy perfect trekking weather. Sikkim becomes a paradise with lush green landscapes, pleasant temperatures, and ideal conditions for outdoor adventures and nature lovers."
+    },
+    2: {
+        title: "Autumn Season",
+        image: "{% static 'images/autum_rishikesh.jpg' %}",
+        desc: "Autumn brings clear skies and is the season of festivals in India. Experience the spiritual Ganga Aarti at Rishikesh and thrilling river rafting adventures. The weather is perfect for travel with comfortable temperatures and reduced rainfall, making it ideal for explorations."
+    },
+    3: {
+        title: "Winter Season",
+        image: "{% static 'images/winter_ladakh.jpg' %}",
+        desc: "Winter transforms Ladakh into a snow-covered wonderland. Tackle the legendary Chadar Trek on frozen rivers and witness magical frozen landscapes. The pristine white scenery creates a surreal environment perfect for adventure seekers and photography enthusiasts."
+    },
+    4: {
+        title: "Spring Season",
+        image: "{% static 'images/spring_kochi.jpg' %}",
+        desc: "Spring brings blooming flowers and pleasant weather across India. Explore the serene backwaters of Kochi and immerse yourself in rich heritage sites. The mild climate and scenic beauty make it an ideal season for all types of travel and cultural experiences."
+    }
+};
 
+function showSeasonModal(id) {
+    const modal = document.getElementById('seasonModal');
+    const data = seasonData[id];
+    
+    if (data) {
+        document.getElementById('seasonHero').src = data.image;
+        document.getElementById('seasonTitle').textContent = data.title;
+        document.getElementById('seasonDesc').textContent = data.desc;
+        modal.style.display = "block";
+        document.body.style.overflow = "hidden";
+    }
+}
 
+function closeSeasonModal() {
+    const modal = document.getElementById('seasonModal');
+    modal.style.display = "none";
+    document.body.style.overflow = "auto";
+}
 
-
-
-
-<!--  -->
-
+window.onclick = function(event) {
+    const modal = document.getElementById('seasonModal');
+    if (event.target === modal) {
+        closeSeasonModal();
+    }
+}
+</script>
 
 {%endblock%}
