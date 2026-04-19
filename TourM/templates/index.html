@@ -40,49 +40,65 @@
 
 <!-- home section ends -->
 
-<!-- services section starts  -->
+<!-- Services Section Starts -->
+<section class="services" id="services">
+    <div class="container">
+        <h1 class="heading-title">Our Services</h1>
+        
+        <div class="box-container">
+            
+            <div class="box" onclick="showServiceModal(1)">
+                <img src="{% static 'images/icon-1.png' %}" alt="Adventure">
+                <h3>Adventure</h3>
+            </div>
 
-<section class="services ">
+            <div class="box" onclick="showServiceModal(2)">
+                <img src="{% static 'images/icon-2.png' %}" alt="Tour Guide">
+                <h3>Tour Guide</h3>
+            </div>
 
-	<h1 class="heading-title "> our services </h1>
+            <div class="box" onclick="showServiceModal(3)">
+                <img src="{% static 'images/icon-3.png' %}" alt="Trekking">
+                <h3>Trekking</h3>
+            </div>
 
-	<div class="box-container ">
+            <div class="box" onclick="showServiceModal(4)">
+                <img src="{% static 'images/icon-4.png' %}" alt="Camp Fire">
+                <h3>Camp Fire</h3>
+            </div>
 
-		<div class="box ">
-			<img src="{% static 'images/icon-1.png' %} " alt=" ">
-			<h3>adventure</h3>
-		</div>
+            <div class="box" onclick="showServiceModal(5)">
+                <img src="{% static 'images/icon-5.png' %}" alt="Off Road">
+                <h3>Off Road</h3>
+            </div>
 
-		<div class="box ">
-			<img src="{% static 'images/icon-2.png' %} " alt=" ">
-			<h3>tour guide</h3>
-		</div>
+            <div class="box" onclick="showServiceModal(6)">
+                <img src="{% static 'images/icon-6.png' %}" alt="Camping">
+                <h3>Camping</h3>
+            </div>
 
-		<div class="box ">
-			<img src="{% static 'images/icon-3.png' %} " alt=" ">
-			<h3>trekking</h3>
-		</div>
-
-		<div class="box ">
-			<img src="{% static 'images/icon-4.png' %} " alt=" ">
-			<h3>camp fire</h3>
-		</div>
-
-		<div class="box ">
-			<img src="{% static 'images/icon-5.png' %} " alt=" ">
-			<h3>off road</h3>
-		</div>
-
-		<div class="box ">
-			<img src="{% static 'images/icon-6.png' %} " alt=" ">
-			<h3>camping</h3>
-		</div>
-
-	</div>
-
+        </div>
+    </div>
 </section>
+<!-- Services Section Ends -->
 
-<!-- services section ends -->
+<!-- ==================== UPDATED SERVICE MODAL HTML ==================== -->
+<!-- Replace your old modal with this new one (place it anywhere after the Services section, preferably just before </body>) -->
+
+<div id="serviceModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        
+        <!-- New large hero image specific to each service -->
+        <img id="modalHero" src="" alt="" class="modal-hero">
+        
+        <!-- Small icon (kept for consistency) -->
+        <img id="modalIcon" src="" alt="" class="modal-icon">
+        
+        <h2 id="modalTitle"></h2>
+        <p id="modalDesc"></p>
+    </div>
+</div>
 
 <!-- home about section starts  -->
 
@@ -143,5 +159,79 @@
 	</div>
 </Section>
 
+
+<script>
+// ==================== SERVICE MODAL POPUP (UPDATED) ====================
+const serviceData = {
+    1: {
+        title: "Adventure",
+        icon: "{% static 'images/icon-1.png' %}",
+        hero: "{% static 'images/adventure.jpg' %}",           // ← Add your own image
+        desc: "Experience heart-pounding adventure activities including zip-lining, bungee jumping, river rafting, and paragliding. Our expert team ensures complete safety while you enjoy the thrill of a lifetime in the breathtaking landscapes of Uttarakhand and Himachal."
+    },
+    2: {
+        title: "Tour Guide",
+        icon: "{% static 'images/icon-2.png' %}",
+        hero: "{% static 'images/tour-guide.jpg' %}",         // ← Add your own image
+        desc: "Our certified and passionate local tour guides will take you through historical sites, hidden gems, and cultural treasures. They provide deep insights into local history, traditions, and stories that make your trip truly enriching."
+    },
+    3: {
+        title: "Trekking",
+        icon: "{% static 'images/icon-3.png' %}",
+        hero: "{% static 'images/trekking.jpg' %}",           // ← Add your own image
+        desc: "Join our guided trekking expeditions to famous trails like Har Ki Dun, Valley of Flowers, Roopkund, and Kedarkantha. Suitable for both beginners and experienced trekkers with proper equipment and safety measures."
+    },
+    4: {
+        title: "Camp Fire",
+        icon: "{% static 'images/icon-4.png' %}",
+        hero: "{% static 'images/campfire.jpg' %}",           // ← Add your own image
+        desc: "Relax under the starry sky with our mesmerizing campfires. Enjoy folk music, storytelling sessions, barbeque, and warm bonfire nights that create unforgettable memories with friends and family."
+    },
+    5: {
+        title: "Off Road",
+        icon: "{% static 'images/icon-5.png' %}",
+        hero: "{% static 'images/offroad.jpg' %}",            // ← Add your own image
+        desc: "Get ready for adrenaline-pumping off-road adventures through rugged mountain paths, dense forests, and challenging terrains using 4x4 vehicles. Perfect for thrill-seekers who love exploring untouched routes."
+    },
+    6: {
+        title: "Camping",
+        icon: "{% static 'images/icon-6.png' %}",
+        hero: "{% static 'images/camping.jpg' %}",            // ← Add your own image
+        desc: "Experience the joy of camping in pristine locations with comfortable tents, bonfires, and delicious meals. Our camping sites offer stunning views, clean facilities, and a perfect blend of adventure and comfort."
+    }
+};
+
+function showServiceModal(id) {
+    const modal = document.getElementById('serviceModal');
+    const data = serviceData[id];
+    
+    if (data) {
+        document.getElementById('modalHero').src = data.hero;
+        document.getElementById('modalIcon').src = data.icon;
+        document.getElementById('modalTitle').textContent = data.title;
+        document.getElementById('modalDesc').textContent = data.desc;
+        
+        modal.style.display = "flex";
+        document.body.style.overflow = "hidden";
+    }
+}
+
+function closeModal() {
+    const modal = document.getElementById('serviceModal');
+    modal.style.display = "none";
+    document.body.style.overflow = "auto";
+}
+
+// Close when clicking outside or pressing Escape
+window.onclick = function(event) {
+    const modal = document.getElementById('serviceModal');
+    if (event.target === modal) closeModal();
+};
+
+document.addEventListener('keydown', function(e) {
+    if (e.key === "Escape") closeModal();
+});
+
+</script>
 
 {%endblock%}
