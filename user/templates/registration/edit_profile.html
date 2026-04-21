@@ -1,25 +1,75 @@
-{%extends 'registration/base.html'%} {%block title%}Edit profile{%endblock%} {%block content%} {% load static%}
+{% extends 'registration/base.html' %}
+{% block title %}Edit Profile{% endblock %}
 
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
+{% block content %}
+{% load static %}
 
-<div class="w-50 p-5 container " style="box-shadow: 0 2px 4px rgba(1, 36, 43, 0.4), 0 -1px 2px rgb(3 54 63 / 4%); border-radius: 20px; background-color: white;">
-    <h1 style="text-align: center;"> Edit Profile</h1>
-    <br>
-    <form class="login" method="POST">
-        {%csrf_token%} {{form.as_p}}
-        <br>
-        <div class="text-center">
-            <button class="btn btn-primary">Update Password</button>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+            
+            <!-- Modern Profile Card -->
+            <div class="card shadow-lg border-0 rounded-4">
+                
+                <div class="card-header bg-primary text-white text-center py-4 rounded-top-4">
+                    <div class="mx-auto mb-3 d-inline-flex align-items-center justify-content-center bg-white bg-opacity-20 rounded-circle" style="width: 70px; height: 70px;">
+                        <i class="fa fa-user-edit fa-3x"></i>
+                    </div>
+                    <h2 class="fw-bold mb-0">Edit Profile</h2>
+                    <p class="mb-0 opacity-75">Update your account information</p>
+                </div>
+
+                <div class="card-body p-5">
+                    <form method="POST" class="needs-validation" novalidate>
+                        {% csrf_token %}
+
+                        <!-- Django form rendered beautifully -->
+                        <div class="mb-4">
+                            {{ form.as_p }}
+                        </div>
+
+                        <!-- Modern Submit Button -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg rounded-3 py-3 fw-semibold">
+                                <i class="fa fa-save me-2"></i>
+                                Update Password
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Optional Footer -->
+                <div class="card-footer bg-light border-0 text-center py-4">
+                    <a href="{% url 'homeView' %}" class="text-decoration-none text-muted">
+                        <i class="fa fa-arrow-left me-1"></i> Back to Home
+                    </a>
+                </div>
+            </div>
+
         </div>
-
-    </form>
-
-
-    </form>
+    </div>
 </div>
 
-{%endblock%}
+<!-- Bootstrap 5 JS (if not already included in base.html) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
+        crossorigin="anonymous"></script>
+
+<script>
+    // Optional: Bootstrap form validation styling
+    (function () {
+        'use strict';
+        const forms = document.querySelectorAll('.needs-validation');
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    })();
+</script>
+
+{% endblock %}
