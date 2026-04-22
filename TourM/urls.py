@@ -1,7 +1,6 @@
 from django.urls import path
 from . import views
-from .  views import ad_homeView, enrollView, pack_detailView, homeView,UpdatePostView, DeletePostView,paymentView
-
+from .views import ad_homeView, pack_detailView, homeView, UpdatePostView, DeletePostView, payment_page, receipt_view, enroll_view
 
 urlpatterns = [
     path('ad-home/', ad_homeView.as_view(), name="ad_homeView"),
@@ -13,10 +12,14 @@ urlpatterns = [
     path('package/', homeView.as_view(), name="homeView"),
     path('details/<int:pk>', pack_detailView.as_view(), name="pack_detailView"),
 
-    path('enroll/', enrollView.as_view(), name="enrollView"),
-    path('api/packages/', views.api_packages, name='api_packages'),
+    # ✅ ENROLL FLOW
+    path('enroll/<int:post_id>/', views.enroll_view, name='enroll'),
 
-    path('details/<int:pk>/checkout', paymentView.as_view(), name="checkout"),
+    # ✅ PAYMENT FLOW
+    path('payment/<int:booking_id>/', payment_page, name='payment'),
+    path('receipt/<int:payment_id>/', receipt_view, name='receipt'),
+
+    path('api/packages/', views.api_packages, name='api_packages'),
 
     path('user_csv', views.user_csv, name="user_csv"),
     path('enroll_csv', views.enroll_csv, name="enroll_csv"),
@@ -24,13 +27,10 @@ urlpatterns = [
 
     path('enrolled/', views.En_usersView, name="enrolled"),
 
-
     path('aboutus/', views.aboutus, name="aboutus"),
     path('seasons/', views.seasons, name="seasons"),
     
-    path('',views.homepage, name="homepage"),
+    path('', views.homepage, name="homepage"),
 
     path('logout/', views.logout_view, name='logout'),
-    
-  
 ]

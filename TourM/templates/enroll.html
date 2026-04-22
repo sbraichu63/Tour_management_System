@@ -1,327 +1,49 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment</title>
-
-    <!-- Bootstrap 5 -->
+    <title>Enroll</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-    <style>
-        body {
-            background: linear-gradient(135deg, #E6E6FA, #F8F8FF);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            font-family: 'Segoe UI', sans-serif;
-        }
-
-        .card {
-            border-radius: 16px;
-            border: none;
-            background: #ffffff;
-        }
-
-        .form-control {
-            border-radius: 10px;
-            padding: 12px;
-            border: 1px solid #d6d6f5;
-        }
-
-        .form-control:focus {
-            border-color: #b8a9ff;
-            box-shadow: 0 0 5px rgba(184, 169, 255, 0.5);
-        }
-
-        .btn-primary {
-            background: #b8a9ff;
-            border: none;
-            border-radius: 10px;
-            padding: 12px;
-            font-weight: 600;
-            color: #fff;
-        }
-
-        .btn-primary:hover {
-            background: #a18eff;
-        }
-
-        .btn-warning {
-            background: #f1f1f1;
-            border: none;
-            color: #555;
-            border-radius: 10px;
-        }
-
-        .btn-warning:hover {
-            background: #e2e2e2;
-        }
-
-        .title {
-            color: #6c63ff;
-            font-weight: 700;
-        }
-
-        .input-group-text {
-            background: #f3f3ff;
-            border: 1px solid #d6d6f5;
-        }
-
-        /* Receipt styling */
-        #receipt-section .card {
-            border: 3px dashed #6c63ff;
-        }
-
-        .receipt-header {
-            border-bottom: 2px solid #e0e0ff;
-        }
-
-        /* Print-friendly styles */
-        @media print {
-            body * {
-                visibility: hidden;
-            }
-            #receipt-section,
-            #receipt-section * {
-                visibility: visible;
-            }
-            #receipt-section {
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
-                margin: 0;
-                padding: 20px;
-                box-shadow: none;
-            }
-            .d-grid {
-                display: none !important;
-            }
-            .card {
-                box-shadow: none !important;
-                border: 3px solid #6c63ff !important;
-            }
-            .btn {
-                display: none !important;
-            }
-        }
-    </style>
 </head>
 
 <body>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">📝 Enroll for {{ post.title }}</h2>
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-6 col-lg-5">
+    <div class="card p-4 shadow-sm">
+        <form method="POST">
+            {% csrf_token %}
 
-            <!-- Page Title (changes to "Receipt" after payment) -->
-            <h2 class="text-center title mb-4" id="page-title">💳 Secure Payment</h2>
-
-            <!-- ==================== PAYMENT SECTION ==================== -->
-            <div id="payment-section">
-                <div class="card shadow-sm">
-                    <div class="card-body p-4">
-
-                        <!-- Booking Summary (add your Django context variables here) -->
-                        <div class="mb-4 p-3 bg-light rounded-3">
-                            <h5 class="title mb-2"><i class="fas fa-suitcase me-2"></i>Booking Summary</h5>
-                            <div class="d-flex justify-content-between mb-1">
-                                <span class="text-muted">Package</span>
-                                <span class="fw-semibold" id="summary-package">Kerala Backwaters Adventure (Example)</span>
-                            </div>
-                            <div class="d-flex justify-content-between mb-1">
-                                <span class="text-muted">Travel Date</span>
-                                <span class="fw-semibold">15 May 2026</span>
-                            </div>
-                            <div class="d-flex justify-content-between mb-1">
-                                <span class="text-muted">Travelers</span>
-                                <span class="fw-semibold">2 Adults</span>
-                            </div>
-                            <hr class="my-2">
-                            <div class="d-flex justify-content-between fs-5">
-                                <span class="fw-bold">Total Amount</span>
-                                <span class="fw-bold text-success" id="summary-amount">₹4,999</span>
-                            </div>
-                        </div>
-
-                        <form onsubmit="handlePayment(event)">
-
-                            <div class="mb-3">
-                                <label class="form-label">Card Owner</label>
-                                <input type="text" id="card-owner-input" class="form-control" placeholder="John Doe" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label">Card Number</label>
-                                <div class="input-group">
-                                    <input type="text" id="card-number-input" class="form-control" placeholder="1234 5678 9012 3456" required>
-                                    <span class="input-group-text">
-                                        <i class="fab fa-cc-visa"></i>
-                                        <i class="fab fa-cc-mastercard ms-2"></i>
-                                    </span>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-6 mb-3">
-                                    <label class="form-label">Expiry</label>
-                                    <input type="text" class="form-control" placeholder="MM/YY" required>
-                                </div>
-
-                                <div class="col-6 mb-3">
-                                    <label class="form-label">CVV</label>
-                                    <input type="password" class="form-control" placeholder="123" required>
-                                </div>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary w-100">
-                                <i class="fas fa-lock me-2"></i> Pay Now ₹4,999
-                            </button>
-
-                        </form>
-
-                    </div>
-                </div>
-
-                <div class="text-center mt-3">
-                    <a href="{% url 'homeView' %}">
-                        <button class="btn btn-warning px-4">⬅ Go Back</button>
-                    </a>
-                </div>
+            <div class="mb-3">
+                <label>Username</label>
+                <input type="text" name="username" class="form-control" required>
             </div>
 
-            <!-- ==================== RECEIPT SECTION (hidden by default) ==================== -->
-            <div id="receipt-section" style="display: none;">
-                <div class="card shadow-sm">
-                    <div class="card-body p-4">
-
-                        <div class="text-center receipt-header pb-3">
-                            <i class="fas fa-check-circle text-success" style="font-size: 4rem;"></i>
-                            <h2 class="title mt-3">✅ Payment Successful!</h2>
-                            <p class="text-success fw-semibold">Your TourVista booking is confirmed</p>
-                        </div>
-
-                        <div class="mb-4">
-                            <!-- Receipt metadata -->
-                            <div class="d-flex justify-content-between border-bottom py-2">
-                                <span class="fw-bold">Receipt Number</span>
-                                <span id="rec-number" class="fw-bold text-primary"></span>
-                            </div>
-                            <div class="d-flex justify-content-between border-bottom py-2">
-                                <span class="fw-bold">Date &amp; Time</span>
-                                <span id="rec-date" class="text-muted"></span>
-                            </div>
-                            <div class="d-flex justify-content-between border-bottom py-2">
-                                <span class="fw-bold">Card Owner</span>
-                                <span id="rec-owner" class="fw-semibold"></span>
-                            </div>
-                            <div class="d-flex justify-content-between border-bottom py-2">
-                                <span class="fw-bold">Payment Method</span>
-                                <span><i class="fab fa-cc-visa me-1"></i>Visa / Mastercard •••• <span id="rec-last4"></span></span>
-                            </div>
-                            <div class="d-flex justify-content-between py-3 bg-light rounded-3 px-3">
-                                <span class="fw-bold fs-5">Total Amount Paid</span>
-                                <span id="rec-amount" class="fw-bold fs-5 text-success"></span>
-                            </div>
-                        </div>
-
-                        <!-- Booking Details (easy to replace with Django variables) -->
-                        <h5 class="title mb-3"><i class="fas fa-file-invoice me-2"></i>Booking Details</h5>
-                        <div class="list-group list-group-flush border rounded-3 mb-4">
-                            <div class="list-group-item d-flex justify-content-between">
-                                <span>Package</span>
-                                <span class="fw-semibold" id="rec-package">Kerala Backwaters Adventure (Example)</span>
-                            </div>
-                            <div class="list-group-item d-flex justify-content-between">
-                                <span>Travel Date</span>
-                                <span class="fw-semibold">15 May 2026</span>
-                            </div>
-                            <div class="list-group-item d-flex justify-content-between">
-                                <span>Travelers</span>
-                                <span class="fw-semibold">2 Adults</span>
-                            </div>
-                            <div class="list-group-item d-flex justify-content-between">
-                                <span>Booking Reference</span>
-                                <span id="rec-booking-ref" class="fw-bold text-primary"></span>
-                            </div>
-                        </div>
-
-                        <div class="text-center text-muted small mb-4">
-                            This is a computer-generated receipt.<br>
-                            Use the <strong>Receipt Number</strong> for any verification or refund requests.
-                        </div>
-
-                        <div class="d-grid gap-2">
-                            <button onclick="printReceipt()" class="btn btn-outline-primary">
-                                <i class="fas fa-print me-2"></i>Print / Save as PDF
-                            </button>
-                            <button onclick="goToHome()" class="btn btn-primary">
-                                <i class="fas fa-home me-2"></i>Go to Home
-                            </button>
-                        </div>
-
-                    </div>
-                </div>
+            <div class="mb-3">
+                <label>First Name</label>
+                <input type="text" name="firstname" class="form-control" required>
             </div>
 
-        </div>
+            <div class="mb-3">
+                <label>Last Name</label>
+                <input type="text" name="lastname" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label>Email</label>
+                <input type="email" name="email" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label>Group Size</label>
+                <input type="number" name="Size" class="form-control" required>
+            </div>
+
+            <button type="submit" class="btn btn-success w-100">
+                Continue to Payment →
+            </button>
+        </form>
     </div>
 </div>
-
-<script>
-    function handlePayment(event) {
-        event.preventDefault();
-
-        // Get real values from the form
-        const cardOwner = document.getElementById('card-owner-input').value || 'John Doe';
-        let cardNumber = document.getElementById('card-number-input').value || '1234567890123456';
-        cardNumber = cardNumber.replace(/\s+/g, ''); // remove spaces
-        const last4 = cardNumber.slice(-4);
-
-        // Generate receipt data (in real Django app, you would pass these from the backend)
-        const receiptNumber = 'TRX-' + String(Math.floor(100000 + Math.random() * 900000));
-        const bookingRef = 'BKG-' + String(Math.floor(10000 + Math.random() * 90000));
-        const amount = 4999;                    // ← TODO: Replace with Django variable e.g. {{ total_amount }}
-        const packageName = "Kerala Backwaters Adventure (Example)"; // ← TODO: Replace with {{ booking.package_name }}
-        const currentDate = new Date().toLocaleString('en-IN', {
-            weekday: 'short',
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-        });
-
-        // Populate receipt
-        document.getElementById('rec-number').textContent = receiptNumber;
-        document.getElementById('rec-date').textContent = currentDate;
-        document.getElementById('rec-owner').textContent = cardOwner;
-        document.getElementById('rec-last4').textContent = last4;
-        document.getElementById('rec-amount').innerHTML = `₹${amount.toLocaleString('en-IN')} <small class="text-muted">Paid successfully</small>`;
-        document.getElementById('rec-booking-ref').textContent = bookingRef;
-        document.getElementById('rec-package').textContent = packageName;
-
-        // Switch UI: hide payment form, show receipt
-        document.getElementById('payment-section').style.display = 'none';
-        document.getElementById('page-title').innerHTML = '📄 Payment Receipt';
-        document.getElementById('receipt-section').style.display = 'block';
-
-        console.log('%c✅ Receipt generated for verification', 'color:#6c63ff; font-weight:bold');
-    }
-
-    function printReceipt() {
-        // The @media print rule above ensures only the receipt is printed
-        window.print();
-    }
-
-    function goToHome() {
-        window.location.href = "/";
-    }
-</script>
-
 </body>
 </html>

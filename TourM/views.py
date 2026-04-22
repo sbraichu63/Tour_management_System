@@ -1,6 +1,6 @@
 
 
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render,get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView,CreateView, UpdateView, DeleteView
 from django.contrib.auth import get_user_model,logout
@@ -8,7 +8,7 @@ from django.http import JsonResponse
 from django.urls import reverse
 
 from .forms import  PostForm,enrollForm
-from .models import Post,enroll
+from .models import Post,enroll,Payment
 
 
 from django.contrib import messages
@@ -25,6 +25,7 @@ import io
 from reportlab.pdfgen import canvas
 from reportlab.lib.units import inch
 from reportlab.lib.pagesizes import letter
+
 
 
 
@@ -98,9 +99,6 @@ class pack_detailView(DetailView):
    
 
 
-class enrollView(ListView):
-    model = Post
-    template_name = 'enroll.html'
 
 
 
@@ -114,17 +112,6 @@ def  En_usersView(request):
 
 
 
-#adding info for enrolli
-class paymentView(CreateView):
-    model = enroll  
-    form_class=enrollForm
-    template_name = 'checkout.html'
-
-    def form_valid(self, form):
-         form.instance.post_id = self.kwargs['pk']
-
-         return super().form_valid(form)
-    success_url = reverse_lazy('enrollView')
 
   
 
@@ -139,6 +126,29 @@ def aboutus(request):
 def homepage(request):
     return render(request, 'index.html')
 
+def enroll_view(request, post_id):
+    print("METHOD:", request.method)  
+
+    post = get_object_or_404(Post, id=post_id)
+
+    if request.method == "POST":
+        print("POST DATA:", request.POST)
+
+        booking = enroll.objects.create(
+            post=post,
+            username=request.POST.get('username'),
+            firstname=request.POST.get('firstname'),
+            lastname=request.POST.get('lastname'),
+            email=request.POST.get('email'),
+            Size=request.POST.get('Size')
+        )
+
+        print("BOOKING ID:", booking.id)
+
+        return redirect('payment', booking_id=booking.id)
+
+    # ✅ ONLY this runs on GET
+    return render(request, 'enroll.html', {'post': post})
 
 def logout_view(request):
     logout(request)
@@ -240,3 +250,44 @@ def user_pdf(request):
 
 
     return FileResponse(buf, as_attachment=True, filename = 'users.pdf')
+
+
+def payment_page(request, booking_id):
+    booking = get_object_or_404(enroll, id=booking_id)
+
+    if request.method == "POST":
+        card_owner = request.POST.get('card_owner')
+        card_number = request.POST.get('card_number')
+
+        # Basic validation (don’t skip)
+        if not card_owner or not card_number:
+            return render(request, 'payment.html', {
+                'booking': booking,
+                'error': 'All fields are required'
+            })
+
+        # Create payment
+        payment = Payment.objects.create(
+            booking=booking,
+            amount=booking.post.price,
+            card_owner=card_owner,
+            card_last4=card_number[-4:]
+        )
+
+        # 🔥 IMPORTANT: redirect to receipt
+        return redirect('receipt', payment_id=payment.id)
+
+    return render(request, 'payment.html', {
+        'booking': booking,
+        'amount': booking.post.price,
+        'package_name': booking.post.title
+    })
+
+def receipt_view(request, payment_id):
+    payment = get_object_or_404(Payment, id=payment_id)
+
+    return render(request, 'receipt.html', {
+        'payment': payment,
+        'booking': payment.booking,
+        'post': payment.booking.post
+    })

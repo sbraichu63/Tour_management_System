@@ -68,7 +68,19 @@ class   enroll(models.Model):
 
     def __str__(self):
          return '%s - %s' %(self.post.title, self.username)
-    
 
 
-   
+import uuid
+
+class Payment(models.Model):
+    booking = models.ForeignKey(enroll, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    card_owner = models.CharField(max_length=100)
+    card_last4 = models.CharField(max_length=4)
+
+    receipt_number = models.CharField(max_length=100, unique=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.receipt_number:
+            self.receipt_number = "TRX-" + uuid.uuid4().hex[:8].upper()
+        super().save(*args, **kwargs)
