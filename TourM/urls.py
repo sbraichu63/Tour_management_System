@@ -29,6 +29,8 @@ urlpatterns = [
     path('seasons/', views.seasons, name="seasons"),
     
     path('',views.homepage, name="homepage"),
+
+    path('logout/', views.logout_view, name='logout'),
     
   
 ]

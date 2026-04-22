@@ -3,7 +3,7 @@
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView,CreateView, UpdateView, DeleteView
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model,logout
 from django.http import JsonResponse
 from django.urls import reverse
 
@@ -12,6 +12,9 @@ from .models import Post,enroll
 
 
 from django.contrib import messages
+
+from django.contrib import messages
+from django.shortcuts import redirect
 
 
 #for generating csv
@@ -135,6 +138,12 @@ def aboutus(request):
 
 def homepage(request):
     return render(request, 'index.html')
+
+
+def logout_view(request):
+    logout(request)
+    messages.success(request, "You have been logged out successfully!")
+    return redirect('homepage')
 
 
 #Generate csv files.
