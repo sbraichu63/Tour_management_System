@@ -1,169 +1,246 @@
-{%extends 'base.html'%} {%block title%}About us{%endblock%} {%block content%} {% load static%}
+{% extends 'base.html' %}
+{% block title %}About us{% endblock %}
+{% block content %}
+{% load static %}
 
-
-<!-- CODE HERE -->>
-
-<div class="heading" style="background:url('/static/images/header-bg-1.png') no-repeat">
-    <h1>about us</h1>
+<!-- HERO -->
+<div class="about-hero">
+    <h1>About Us</h1>
 </div>
 
-<!-- about section starts  -->
-
-<section class="about">
-
-    <div class="image">
-        <img src="{% static 'images/about-img.jpg' %}" alt="">
-    </div>
-
-    <div class="content">
-        <h3>why choose us?</h3>
-        <p> we pride ourselves on producing content that stands out from the crowd.Tourism is one of the mainstay of Indian economy. It is also a major source of foreign exchange and revenue. It is a hotspot destination for mountaineers, rock climbers and people seeking adventures.</p>
-        <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid rerum, delectus voluptate aliquam quaerat iusto repellendus error nulla ab atque.</p> -->
-        <div class="icons-container">
-            <div class="icons">
-                <i class="fas fa-map"></i>
-                <span>top destinations</span>
-            </div>
-            <div class="icons">
-                <i class="fas fa-hand-holding-usd"></i>
-                <span>affordable price</span>
-            </div>
-            <div class="icons">
-                <i class="fas fa-headset"></i>
-                <span>24/7 guide service</span>
-            </div>
-        </div>
-    </div>
-
+<!-- PROJECT DESCRIPTION -->
+<section class="about-text container">
+    <h2>About Our Project</h2>
+    <p>
+        Our project is focused on building a seamless and engaging tourism platform that helps users explore destinations, plan trips, and access reliable travel information with ease. 
+        We aim to provide a user-friendly experience combined with modern design and efficient functionality, making travel planning simple and enjoyable for everyone.
+    </p>
 </section>
 
-<!-- about section ends -->
+<!-- GUIDE SECTION -->
+<section class="guide-section">
+    <h2>Project Guide</h2>
 
-<!-- Reviews Section Starts -->
-<section class="reviews container my-5">
-
-    <h1 class="heading-title text-center mb-5">Client Reviews</h1>
-
-    <!-- Swiper -->
-    <div class="swiper reviews-slider">
-
-        <div class="swiper-wrapper">
-
-            <!-- Slide 1 -->
-            <div class="swiper-slide review-card">
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <h3 class="review-text">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus facilis laudantium magnam saepe magni ullam possimus.
-                </h3>
-                <div class="reviewer">
-                    <img src="{% static 'images/pic-1.jpg' %}" alt="Siddhant Chaudhary">
-                    <div>
-                        <h2>Suryansh Barnawal</h2>
-                        <span  style="font-size: 14px;">Backend Developer</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 2 -->
-            <div class="swiper-slide review-card">
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <h3 class="review-text">
-                    Accusamus repellendus et suscipit optio similique totam aut laborum ullam sequi!
-                </h3>
-                <div class="reviewer">
-                    <img src="{% static 'images/pic-2.jpg' %}" alt="Rashman Shrestha">
-                    <div>
-                        <h2>Abhishek Shahi</h2>
-                        <span  style="font-size: 14px;">Project Manager</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 3 -->
-            <div class="swiper-slide review-card">
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <h3 class="review-text">
-                    Voluptatibus enim deserunt, ab at ea iste odio placeat doloribus eum dolores tempore.
-                </h3>
-                <div class="reviewer">
-                    <img src="{% static 'images/pic-3.jpg' %}" alt="Rajkumar Sapkota">
-                    <div>
-                        <h2>Bhoomi Pandey</h2>
-                        <span style="font-size: 14px;">Developer</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Add more slides here -->
-
+    <div class="guide-card">
+        <img src="{% static 'images/kushal.jpg' %}" alt="Kushal">
+        <div class="guide-info">
+            <h3>Kushal Shrivastava</h3>
+            <p>Project Guide</p>
         </div>
-
-        <!-- Pagination -->
-        <div class="swiper-pagination"></div>
-
-        <!-- Navigation buttons -->
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
-
     </div>
-
 </section>
 
-<!-- Swiper JS and CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
-<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<!-- TEAM DESCRIPTION -->
+<section class="about-text container">
+    <h2>Our Team</h2>
+    <p>
+        Our team is a group of dedicated individuals working collaboratively to bring this project to life.
+        <strong>Suryansh Barnawal</strong> handles backend development, ensuring smooth server-side functionality and database management.
+        <strong>Abhishek Shahi</strong>, as the project manager, oversees planning, coordination, and execution.
+        <strong>Bhoomi Pandey</strong> is responsible for frontend development, creating an intuitive and visually appealing user interface.
+        Under the guidance of <strong>Kushal Shrivastava</strong>, we continue to improve and deliver quality work.
+    </p>
+</section>
 
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    const swiper = new Swiper('.reviews-slider', {
-        slidesPerView: 3,
-        spaceBetween: 30,
-        loop: true,
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
-        breakpoints: {
-            0: { slidesPerView: 1 },
-            768: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
-        }
-    });
-});
-</script>|
+<!-- TEAM SECTION -->
+<section class="team-modern">
+    <h1>Our Team Members</h1>
 
+    <div class="team-grid">
 
+        <div class="team-card">
+            <img src="{% static 'images/suryansh.jpg' %}">
+            <div class="overlay">
+                <h3>Suryansh Barnawal</h3>
+                <span>Backend Developer</span>
+            </div>
+        </div>
 
+        <div class="team-card">
+            <img src="{% static 'images/abhishek.jpg' %}">
+            <div class="overlay">
+                <h3>Abhishek Shahi</h3>
+                <span>Project Manager</span>
+            </div>
+        </div>
 
+        <div class="team-card">
+            <img src="{% static 'images/bhoomi.jpg' %}">
+            <div class="overlay">
+                <h3>Bhoomi Pandey</h3>
+                <span>Frontend Developer</span>
+            </div>
+        </div>
 
+    </div>
+</section>
 
+<!-- STYLING -->
+<style>
 
+/* IMPORT MODERN FONT */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
+body {
+    font-family: 'Poppins', sans-serif;
+}
 
+/* HERO */
+.about-hero {
+    height: 45vh;
+    background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+                url("{% static 'images/header-bg-1.png' %}") center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.about-hero h1 {
+    color: #fff;
+    font-size: 3.5rem;
+    font-weight: 600;
+}
 
+/* TEXT SECTION (FIXED MAIN ISSUE) */
+.about-text {
+    text-align: center;
+    padding: 70px 20px;
+}
 
+.about-text h2 {
+    font-size: 2.4rem;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
 
+.about-text p {
+    max-width: 950px;
+    margin: auto;
+    font-size: 1.15rem;   /* 🔥 increased */
+    color: #444;
+    line-height: 1.9;
+}
 
-<!--  -->
+/* GUIDE */
+.guide-section {
+    text-align: center;
+    padding: 70px 20px;
+}
 
+.guide-section h2 {
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+}
 
-{%endblock%}
+.guide-card {
+    display: inline-block;
+    padding: 30px;
+    border-radius: 20px;
+    background: #ffffff;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+    transition: 0.3s;
+}
+
+.guide-card:hover {
+    transform: translateY(-5px);
+}
+
+.guide-card img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #38bdf8;
+}
+
+.guide-info h3 {
+    margin-top: 20px;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.guide-info p {
+    font-size: 1rem;
+    color: #666;
+}
+
+/* TEAM */
+.team-modern {
+    padding: 90px 20px;
+    background: #0f172a;
+    color: white;
+    text-align: center;
+}
+
+.team-modern h1 {
+    font-size: 2.5rem;
+    margin-bottom: 60px;
+}
+
+/* GRID */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 35px;
+}
+
+/* CARD */
+.team-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.team-card img {
+    width: 100%;
+    height: 340px;
+    object-fit: cover;
+    transition: 0.5s;
+}
+
+/* OVERLAY */
+.overlay {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 25px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.95));
+    transform: translateY(100%);
+    transition: 0.4s;
+}
+
+.overlay h3 {
+    font-size: 1.3rem;
+    margin-bottom: 5px;
+}
+
+.overlay span {
+    font-size: 0.95rem;
+    color: #ddd;
+}
+
+/* HOVER */
+.team-card:hover img {
+    transform: scale(1.1);
+}
+.team-card:hover .overlay {
+    transform: translateY(0);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .about-hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .about-text h2 {
+        font-size: 2rem;
+    }
+
+    .about-text p {
+        font-size: 1rem;
+    }
+}
+
+</style>
+
+{% endblock %}
